@@ -25,8 +25,8 @@ public class lode {
     }
 
     public static void main(String[] args) throws IOException {
-        FileReader file = new FileReader("C:\\Users\\shash\\Desktop\\my folder\\java\\os\\os\\src\\input.txt");
-        FileWriter output = new FileWriter("C:\\Users\\shash\\Desktop\\my folder\\java\\os\\os\\src\\output.txt");
+        FileReader file = new FileReader("/workspace/shashank-patil-os-lab-69/os/out/production/os/input.txt");
+        FileWriter output = new FileWriter("/workspace/shashank-patil-os-lab-69/os/out/production/os/output.txt");
         BufferedReader br = new BufferedReader(file);
         String s = br.readLine();
         while (s != null) {
