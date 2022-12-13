@@ -1,89 +1,80 @@
-// import java.util.*;
+import java.util.Scanner;
  
-// /// Data Structure
-// class Process {
-//     int at, bt, pri, pno;
-//     Process(int pno, int at, int bt, int pri)
-//     {
-//         this.pno = pno;
-//         this.pri = pri;
-//         this.at = at;
-//         this.bt = bt;
-//     }
-// }
+public class prorityScheduling{
+        
+    public static void main(String args[]) {
+            Scanner s = new Scanner(System.in);
  
-// /// Gantt chart structure
-// class GChart {
-//     // process number, start time, complete time,
-//     // turn around time, waiting time
-//     int pno, stime, ctime, wtime, ttime;
-// }
+            int x,n,p[],pp[],bt[],w[],t[],awt,atat,i;
  
-// // user define comparative method (first arrival first serve,
-// // if arrival time same then heigh priority first)
-// class MyComparator implements Comparator {
+            p = new int[10];
+            pp = new int[10];
+            bt = new int[10];
+            w = new int[10];
+            t = new int[10];
  
-//     public int compare(Object o1, Object o2)
-//     {
- 
-//         Process p1 = (Process)o1;
-//         Process p2 = (Process)o2;
-//         if (p1.at < p2.at)
-//             return (-1);
- 
-//         else if (p1.at == p2.at && p1.pri > p2.pri)
-//             return (-1);
- 
-//         else
-//             return (1);
-//     }
-// }
+   //n is number of process
+   //p is process
+   //pp is process priority
+   //bt is process burst time
+   //w is wait time
+   // t is turnaround time
+   //awt is average waiting time
+   //atat is average turnaround time
  
  
-// // class to find Gantt chart
-// class FindGantChart {
-//     void findGc(LinkedList queue)
-//     {
+   System.out.print("Enter the number of process : ");
+   n = s.nextInt();
+    System.out.print("\n\t Enter burst time : time priorities \n");
  
-//         // initial time = 0
-//         int time = 0;
+   for(i=0;i<n;i++)
+    {
+       System.out.print("\nProcess["+(i+1)+"]:");
+      bt[i] = s.nextInt();
+      pp[i] = s.nextInt();
+      p[i]=i+1;
+    }
  
-//         // priority Queue sort data according
-//         // to arrival time or priority (ready queue)
-//         TreeSet prique = new TreeSet(new MyComparator());
+//sorting on the basis of priority
+  for(i=0;i<n-1;i++)
+   {
+     for(int j=i+1;j<n;j++)
+     {
+       if(pp[i]>pp[j])
+       {
+     x=pp[i];
+     pp[i]=pp[j];
+     pp[j]=x;
+     x=bt[i];
+     bt[i]=bt[j];
+     bt[j]=x;
+     x=p[i];
+     p[i]=p[j];
+     p[j]=x;
+      }
+   }
+}
+w[0]=0;
+awt=0;
+t[0]=bt[0];
+atat=t[0];
+for(i=1;i<n;i++)
+ {
+   w[i]=t[i-1];
+   awt+=w[i];
+   t[i]=w[i]+bt[i];
+   atat+=t[i];
+ }
  
-//         // link list for store processes data
-//         LinkedList result = new LinkedList();
+//Displaying the process
  
-//         // process in ready queue from new state queue
-//         while (queue.size() > 0)
-//             prique.add((Process)queue.removeFirst());
+  System.out.print("\n\nProcess \t Burst Time \t Wait Time \t Turn Around Time   Priority \n");
+for(i=0;i<n;i++)
+  System.out.print("\n   "+p[i]+"\t\t   "+bt[i]+"\t\t     "+w[i]+"\t\t     "+t[i]+"\t\t     "+pp[i]+"\n");
+awt/=n;
+atat/=n;
+  System.out.print("\n Average Wait Time : "+awt);
+  System.out.print("\n Average Turn Around Time : "+atat);
  
-//         Iterator it = prique.iterator();
- 
-//         // time set to according to first process
-//         time = ((Process)prique.first()).at;
- 
-//         // scheduling process
-//         while (it.hasNext()) {
- 
-//             // dispatcher dispatch the
-//             // process ready to running state
-//             Process obj = (Process)it.next();
- 
-//             GChart gc1 = new GChart();
-//             gc1.pno = obj.pno;
-//             gc1.stime = time;
-//             time += obj.bt;
-//             gc1.ctime = time;
-//             gc1.ttime = gc1.ctime - obj.at;
-//             gc1.wtime = gc1.ttime - obj.bt;
- 
-//             /// store the exxtreted process
-//             result.add(gc1);
-//         }
- 
-//         // create object of output class and call method
-//         new ResultOutput(result);
-//     }
-// }
+        }
+}
