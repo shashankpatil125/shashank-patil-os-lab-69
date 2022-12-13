@@ -1,0 +1,14 @@
+1. Redirect the output of ls command to a file named outfile. Use this asaninput file
+
+Ls > /path/to/file
+
+2. read file content
+
+cat filename.txt
+
+3. read specific line of file
+
+sed -n 5p filename.txt
+
+4.
+
